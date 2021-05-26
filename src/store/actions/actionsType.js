@@ -13,6 +13,8 @@ export const GET_AREA = 'GET_AREA';
 
 //Product
 export const GET_PRODUCT = 'GET_FOOD';
+export const GET_TYPE_PRODUCT = 'GET_TYPE_PRODUCT';
+export const ADD_TYPE_PRODUCT = 'ADD_TYPE_PRODUCT';
 export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const DELETE_PRODUCT = 'DELETE_PRODUCT';
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
@@ -29,5 +31,10 @@ export const GET_ORDER = 'GET_ORDER';
 export const ADD_ORDER = 'ADD_ORDER';
 export const DELETE_ORDER = 'DELETE_ORDER';
 export const UPDATE_ORDER = 'UPDATE_ORDER';
+
+//Pagination
+export const TOTAL_PAGE = 'TOTAL_PAGE';
+export const GET_PAGE = 'GET_PAGE';
+export const GET_PER_PAGE = 'GET_PER_PAGE';
 
 

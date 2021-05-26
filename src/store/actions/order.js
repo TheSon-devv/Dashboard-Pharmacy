@@ -36,7 +36,7 @@ export const getOrder = () => {
         axios.get(`${process.env.REACT_APP_BASE_URL}/checkout`, headerAuthorization())
             .then(res => {
                 if (res.data.code === 200) {
-                    // console.log(res.data)
+                    console.log(res.data)
                     dispatch(Success(res.data.getCheckout))
                 }
                 if (res.data.code === 401) {

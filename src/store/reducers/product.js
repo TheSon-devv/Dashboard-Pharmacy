@@ -1,7 +1,8 @@
 import * as actions from "../actions/actionsType";
 
 const initState = {
-    productList: []
+    productList: [],
+    typeProduct : []
 }
 
 export const product = (state = initState, action) => {
@@ -10,6 +11,16 @@ export const product = (state = initState, action) => {
             return {
                 ...state,
                 productList: [...action.data]
+            }
+        case actions.GET_TYPE_PRODUCT:
+            return {
+                ...state,
+                typeProduct: [...action.payload]
+            }
+        case actions.ADD_TYPE_PRODUCT:
+            return {
+                ...state,
+                typeProduct: [...state.typeProduct,action.payload]
             }
         case actions.ADD_PRODUCT:
             return {

@@ -10,6 +10,18 @@ export const Success = (data) => {
         data: data
     }
 }
+export const TypeProduct = (payload) => {
+    return {
+        type: actionType.GET_TYPE_PRODUCT,
+        payload
+    }
+}
+export const AddTypeProduct = (payload) => {
+    return {
+        type: actionType.ADD_TYPE_PRODUCT,
+        payload
+    }
+}
 
 export const Add = (dataAdd) => {
     return {
@@ -47,18 +59,54 @@ export const getProduct = () => {
             .catch(err => console.log(err))
     }
 }
+export const getTypeProduct = () => {
+    return dispatch => {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/typePharmacy`)
+            .then(res => {
+                if (res.data.code === 200) {
+                    console.log(res.data)
+                    dispatch(TypeProduct(res.data.getTypePharmacy))
+                }
+                if (res.data.code === 401) {
+                    alert('Loi roi')
+                }
+            })
+            .catch(err => console.log(err))
+    }
+}
 
-export const addProduct = (namePharmacy,pricePharmacy,status,promotion,information, pharmacyImage )=> {
+export const addTypeProduct = (nameTypePharmacy) => {
+    return dispatch => {
+        const formData = {
+            nameTypePharmacy : nameTypePharmacy
+        }
+        axios.post(`${process.env.REACT_APP_BASE_URL}/typePharmacy`, formData, headerAuthorization())
+            .then(res => {
+                if (res.data.code === 200) {
+                    console.log(res.data)
+                    dispatch(AddTypeProduct(res.data.saveTypePharmacy))
+                    toast.success('Thêm loại thuốc thành công !', { position: toast.POSITION.TOP_RIGHT })
+                }
+                if (res.data.code === 401 || res.data.code === 400 || res.data.code === 500) {
+                    toast.error('Thêm loại thuốc thất bại !', { position: toast.POSITION.TOP_RIGHT })
+                }
+            })
+            .catch(err => console.log(err))
+    }
+}
+
+export const addProduct = (namePharmacy, typePharmacy, pricePharmacy, status, promotion, information, pharmacyImage) => {
     return dispatch => {
         const formData = new FormData();
         formData.append("namePharmacy", namePharmacy);
+        formData.append("typePharmacy", typePharmacy);
         formData.append("pricePharmacy", pricePharmacy);
         formData.append("information", information);
         formData.append("promotion", promotion);
         formData.append("status", status);
         formData.append("pharmacyImage", pharmacyImage);
-        // console.log(...formData)
-        axios.post(`${process.env.REACT_APP_BASE_URL}/pharmacy`, formData,headerAuthorization())
+        console.log(...formData)
+        axios.post(`${process.env.REACT_APP_BASE_URL}/pharmacy`, formData, headerAuthorization())
             .then(res => {
                 if (res.data.code === 200) {
                     console.log(res.data)
@@ -91,7 +139,7 @@ export const deleteProduct = (id) => {
 }
 
 
-export const updateProduct = (id, namePharmacy,pricePharmacy,status,promotion,information, pharmacyImage) => {
+export const updateProduct = (id, namePharmacy, pricePharmacy, status, promotion, information, pharmacyImage) => {
     return dispatch => {
         const formData = new FormData();
         formData.append("namePharmacy", namePharmacy);

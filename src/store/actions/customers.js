@@ -87,11 +87,11 @@ export const deleteCustomer = (id) => {
 }
 
 
-export const updateCustomer = (id, nameKH, nameLogin, password, phoneNumber) => {
+export const updateCustomer = (id, nameKH, email, password, phoneNumber) => {
     return dispatch => {
         const dataUpdateCustomer = {
             nameKH: nameKH,
-            nameLogin: nameLogin,
+            email: email,
             password: password,
             phoneNumber: phoneNumber
         }

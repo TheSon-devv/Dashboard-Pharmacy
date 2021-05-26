@@ -12,7 +12,7 @@ const ManageOrder = () => {
     return (
         <div className="container-fluid mt-2">
             <div className="content">
-                <button className="btn btn-success" onClick={() => setShow(true)}>Show add</button>
+                {/* <button className="btn btn-success" onClick={() => setShow(true)}>Thêm đơn</button> */}
                 {
                     show ? (
                         <PopUpAddCustomer

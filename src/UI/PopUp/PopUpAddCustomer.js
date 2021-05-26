@@ -13,6 +13,9 @@ const PopUpAdd = (props) => {
 
     const onSubmit = async (data) => {
         await dispatch(addCustomer(data.nameKH, data.nameLogin, data.password, data.phoneNumber));
+        setTimeout( () => {
+            dispatch(getCustomer())
+        },1000)
     }
 
     return (

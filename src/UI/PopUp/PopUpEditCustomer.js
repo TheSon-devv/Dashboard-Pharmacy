@@ -8,7 +8,7 @@ import { getCustomer, updateCustomer } from '../../store/actions/customers';
 const PopUpEditCustomer = (props) => {
     const [data, setData] = useState({
         nameKH: "",
-        nameLogin: "",
+        email: "",
         password: "",
         phoneNumber: ""
     });
@@ -17,10 +17,10 @@ const PopUpEditCustomer = (props) => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        await dispatch(updateCustomer(props.dataEdit, data.nameKH, data.nameLogin, data.password, data.phoneNumber));
+        await dispatch(updateCustomer(props.dataEdit, data.nameKH, data.email, data.password, data.phoneNumber));
         setTimeout(() => {
             dispatch(getCustomer())
-        },1000)
+        }, 1000)
     }
     const updateHandlerChanged = (e) => {
         setData({
@@ -60,7 +60,6 @@ const PopUpEditCustomer = (props) => {
                                     onChange={updateHandlerChanged}
                                     required={true}
                                     minLength="1"
-                                    maxLength="5"
                                 />
                             </div>
                             <div className="col-md-6 col-12">
@@ -68,8 +67,8 @@ const PopUpEditCustomer = (props) => {
                                 <input type="text"
                                     className="w-100 form-control focus-remove-shadow"
                                     style={{ boxShadow: "none !important" }}
-                                    name="nameLogin"
-                                    value={data.nameLogin}
+                                    name="email"
+                                    value={data.email}
                                     onChange={updateHandlerChanged}
                                     required={true}
                                     minLength="1"
@@ -81,18 +80,7 @@ const PopUpEditCustomer = (props) => {
                         <div className="row py-2">
                             <div className="col-md-6 col-12">
                                 <input type="text"
-                                    className="w-100 form-control focus-remove-shadow"
-                                    style={{ boxShadow: "none !important" }}
-                                    name="password"
-                                    value={data.password}
-                                    onChange={updateHandlerChanged}
-                                    required={true}
-                                    minLength="1"
-                                    maxLength="11"
-                                />
-                            </div>
-                            <div className="col-md-6 col-12">
-                                <input type="text"
+                                    placeholder="Số điện thoại"
                                     className="w-100 form-control focus-remove-shadow"
                                     style={{ boxShadow: "none !important" }}
                                     name="phoneNumber"

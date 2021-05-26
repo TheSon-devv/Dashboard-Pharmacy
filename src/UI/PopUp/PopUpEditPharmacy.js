@@ -9,6 +9,7 @@ import { getProduct, updateProduct } from '../../store/actions/product';
 const PopUpEditPharmacy = (props) => {
     const [data, setData] = useState({
         namePharmacy: "",
+        typePharmacy: "",
         pricePharmacy: "",
         information: "",
         status: "",
@@ -16,6 +17,7 @@ const PopUpEditPharmacy = (props) => {
         pharmacyImage: null,
     });
     const product = useSelector(state => state.product.productList);
+    const typeProduct = useSelector(state => state.product.typeProduct)
     const dispatch = useDispatch();
 
     const onSubmit = async (e) => {
@@ -49,6 +51,7 @@ const PopUpEditPharmacy = (props) => {
         }
         return () => (isSubscribed = false)
     }, [props.dataEdit])
+    console.log(props)
     return (
         <div className="container px-3">
             <Popup open={props.open} closeOnDocumentClick onClose={props.closeModal} modal>
@@ -102,16 +105,21 @@ const PopUpEditPharmacy = (props) => {
                             </div>
                             <div className="col-md-6 col-12">
 
-                                <input type="text"
+                                <select
                                     className="w-100 form-control focus-remove-shadow"
                                     style={{ boxShadow: "none !important" }}
                                     name="promotion"
                                     value={data.promotion}
                                     onChange={updateHandlerChanged}
-                                    required={true}
-                                    minLength="1"
-                                    maxLength="50"
-                                />
+                                >
+                                    <option value="">Khuyến mãi</option>
+                                    <option value="5">5%</option>
+                                    <option value="10">10%</option>
+                                    <option value="15">15%</option>
+                                    <option value="20">20%</option>
+                                    <option value="25">25%</option>
+                                    <option value="30">30%</option>
+                                </select>
                             </div>
                         </div>
 
@@ -136,6 +144,7 @@ const PopUpEditPharmacy = (props) => {
                                 />
                             </div>
                         </div>
+
                         <div className="py-3" style={{ display: 'flex', justifyContent: 'flex-end' }}>
                             <button type="submit" className="btn btn-info">Xác nhận</button>
                             <button className="btn btn-danger" style={{ marginLeft: 10 }} onClick={props.closeModal}>Hủy</button>

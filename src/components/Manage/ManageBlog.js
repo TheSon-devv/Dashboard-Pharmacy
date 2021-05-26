@@ -3,7 +3,8 @@ import { useDispatch } from 'react-redux'
 import PopUpAddBlog from '../../UI/PopUp/PopUpAddBlog'
 import ResultTableBlog from '../../components/content/ResultTableBlog'
 
-const ManageBlog= () => {
+
+const ManageBlog= (props) => {
     const [show, setShow] = useState(false)
     const closeModal = () => setShow(false)
     const dispatch = useDispatch()
@@ -21,7 +22,7 @@ const ManageBlog= () => {
                         />
                     ) : null
                 }
-                <ResultTableBlog />
+                <ResultTableBlog {...props}/>
             </div>
         </div>
     )
