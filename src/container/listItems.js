@@ -6,6 +6,7 @@ import DescriptionRoundedIcon from '@material-ui/icons/DescriptionRounded';
 import LayersIcon from '@material-ui/icons/Layers';
 import LocalPharmacyRoundedIcon from '@material-ui/icons/LocalPharmacyRounded';
 import PersonRoundedIcon from '@material-ui/icons/PersonRounded';
+import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
 import React from 'react';
 import {
     NavLink
@@ -14,6 +15,14 @@ import {
 
 export const mainListItems = (
     <div>
+        <NavLink to="/" style={{ textDecoration: 'none', color: '#000000' }}>
+            <ListItem button>
+                <ListItemIcon>
+                    <HomeRoundedIcon />
+                </ListItemIcon>
+                <ListItemText primary="Home" />
+            </ListItem>
+        </NavLink>
         <NavLink to="/ManageCustomer" style={{ textDecoration: 'none', color: '#000000' }}>
             <ListItem button>
                 <ListItemIcon>
@@ -46,14 +55,6 @@ export const mainListItems = (
                 <ListItemText primary="Đăng bài Blog" />
             </ListItem>
         </NavLink>
-        <ListItem button>
-            <ListItemIcon>
-                <LayersIcon />
-            </ListItemIcon>
-            <ListItemText primary="Integrations" />
-        </ListItem>
-
-
     </div>
 );
 

@@ -192,10 +192,6 @@ export default function Dashboard() {
                     {switchRouter}
                 </main>
             </div>
-            <Switch>
-                <Route exact path="/home" />
-                <Route path="/Popup" component={PopUpAdd} />
-            </Switch>
         </Router>
     );
 }

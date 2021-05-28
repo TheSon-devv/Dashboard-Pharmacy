@@ -9,7 +9,6 @@ export const Success = (data) => {
         data: data
     }
 }
-
 export const Add = (dataAdd) => {
     return {
         type: actionType.ADD_ORDER,
@@ -24,10 +23,10 @@ export const Delete = (dataDelete) => {
     }
 }
 
-export const Update = (id,dataUpdate) => {
+export const Update = (id, dataUpdate) => {
     return {
         type: actionType.UPDATE_ORDER,
-        payload: {id,...dataUpdate}
+        payload: { id, ...dataUpdate }
     }
 }
 
@@ -99,7 +98,7 @@ export const updateOrder = (id, nameKH, nameLogin, password, phoneNumber) => {
             .then(res => {
                 // console.log(res.data)
                 if (res.data.code === 200) {
-                    dispatch(Update(id,dataUpdateCustomer))
+                    dispatch(Update(id, dataUpdateCustomer))
                     toast.success('Sửa thông tin khách hàng thành công !', { position: toast.POSITION.TOP_RIGHT })
                 }
                 else {
