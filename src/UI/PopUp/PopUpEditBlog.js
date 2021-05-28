@@ -33,7 +33,7 @@ const PopUpEditBlog = (props) => {
     const updateFileChanged = (e) => {
         setData({
             ...data,
-            pharmacyImage: e.target.files[0]
+            blogImage: e.target.files[0]
         })
     }
     useEffect(() => {
@@ -67,7 +67,6 @@ const PopUpEditBlog = (props) => {
                                     onChange={updateHandlerChanged}
                                     required={true}
                                     minLength="1"
-                                    maxLength="50"
                                 />
                             </div>
                             <div className="col-md-6 col-12">

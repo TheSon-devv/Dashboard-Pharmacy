@@ -63,7 +63,7 @@ const ResultTableOrder = () => {
                         })
                         }</td>
                         <td>{item.quantity}</td>
-                        <td>{item.totalPrice}</td>
+                        <td>{Number(item.totalPrice).toFixed(2)} $</td>
                         <td>{item.userId.map(user => {
                             return (
                                 <div key={user._id}>

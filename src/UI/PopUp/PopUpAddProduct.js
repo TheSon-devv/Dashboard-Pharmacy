@@ -39,10 +39,10 @@ const PopUpAdd = (props) => {
                                 />
                             </div>
                             <div className="col-md-6 col-12">
-                                <input type="text" placeholder="Đơn giá" {...register("pricePharmacy", { required: true, maxLength: 11 })}
+                                <input type="text" placeholder="Đơn giá ex : 7 $" {...register("pricePharmacy", { required: true, maxLength: 11 })}
                                     className="w-100 form-control focus-remove-shadow"
                                     style={{ boxShadow: "none !important" }}
-                                    maxLength="11"
+                                    maxLength="2"
                                 />
                             </div>
                         </div>

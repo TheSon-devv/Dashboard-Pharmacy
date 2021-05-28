@@ -12,8 +12,10 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import MenuIcon from '@material-ui/icons/Menu';
 import clsx from 'clsx';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import routers from '../routers';
+import { logOut } from '../store/actions/authenticate';
 import PopUpAdd from '../UI/PopUp/PopUpAddCustomer';
 import { mainListItems } from './listItems';
 
@@ -132,6 +134,7 @@ const switchRouter = (
 export default function Dashboard() {
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
+    const dispatch = useDispatch();
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -159,9 +162,9 @@ export default function Dashboard() {
                             Dashboard
                         </Typography>
                         <IconButton color="inherit">
-                                <AccountCircleIcon />
+                            <AccountCircleIcon />
                         </IconButton>
-                        <IconButton color="inherit" onClick={() => { localStorage.clear(); window.location.reload(); }}>
+                        <IconButton color="inherit" onClick={() => { dispatch(logOut())}}>
                             Logout
                         </IconButton>
                     </Toolbar>
@@ -190,7 +193,7 @@ export default function Dashboard() {
                 </main>
             </div>
             <Switch>
-                <Route exact path="/home"  />
+                <Route exact path="/home" />
                 <Route path="/Popup" component={PopUpAdd} />
             </Switch>
         </Router>

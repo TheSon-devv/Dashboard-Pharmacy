@@ -89,17 +89,17 @@ export const deleteBlog = (id) => {
 }
 
 
-export const updateBlog = (id, nameBlog, information, adminCreate, blogImage) => {
+export const updateBlog = (id, nameBlog, adminCreate, information, blogImage) => {
     return dispatch => {
         const formData = new FormData();
         formData.append("nameBlog", nameBlog);
-        formData.append("information", information);
         formData.append("adminCreate", adminCreate);
+        formData.append("information", information);
         formData.append("blogImage", blogImage);
-        console.log(...formData)
+        // console.log(...formData)
         axios.put(`${process.env.REACT_APP_BASE_URL}/blog/${id}`, formData, headerAuthorization())
             .then(res => {
-                console.log(res.data)
+                // console.log(res.data)
                 if (res.data.code === 200) {
                     dispatch(Update(id, formData))
                     toast.success('Sửa thông tin sản phẩm thành công !', { position: toast.POSITION.TOP_RIGHT })

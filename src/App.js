@@ -1,47 +1,40 @@
-import Dashboard from "./container/dashboard";
-import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import SignIn from "./components/Login/SignIn";
-import { Component } from "react";
+import Dashboard from "./container/dashboard";
+import { authCheckState } from "./store/actions/authenticate";
 
 require('dotenv').config()
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  PrivateRouter = ({ component: Component, ...rest }) => (
-    <Route
-      {...rest}
-      render={(props) =>
-        localStorage.getItem('token') ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to="/signIn" />
-        )
-      }
-    />
-  );
-  // componentDidMount() {
-  //   const expiresIn = new Date(localStorage.getItem('expiresIn'))
-  //   console.log('expiresIn : ', expiresIn)
-  //   console.log(new Date())
-  //   if (expiresIn <= new Date()) {
-  //     localStorage.clear();
-  //   }
-  //   else {
-  //     setTimeout(() => {
-  //       localStorage.clear();
-  //       window.location.reload();
-  //     },((expiresIn.getTime() - new Date().getTime()) / 1000))
-  //   }
-  // }
-  render() {
-    return (
-      <Router>
-        <Route path="/signIn" component={SignIn} />
-        <this.PrivateRouter path="/" component={Dashboard} />
-      </Router>
+function App() {
+
+  const dispatch = useDispatch();
+  const token = useSelector(state => state.authenticate.token);
+
+  useEffect(() => {
+    dispatch(authCheckState())
+  }, [])
+
+  let router = (
+    <Switch>
+      <Route exact path="/signIn" component={SignIn} />
+      <Redirect to="/signIn" />
+    </Switch>
+  )
+  if (token) {
+    router = (
+      <Switch>
+        <Route exact path="/" component={Dashboard} />
+        <Redirect to="/" />
+      </Switch>
     )
   }
+  return (
+    <Router>
+      {router}
+    </Router>
+  )
 }
+
+export default App;
 

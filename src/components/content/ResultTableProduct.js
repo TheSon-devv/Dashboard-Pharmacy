@@ -49,7 +49,7 @@ const ResultTableCustomer = () => {
                     <tr key={sttAcc}>
                         <td style={{ width: '1%' }}>{sttAcc}</td>
                         <td style={{ width: '7%' }}>{item.namePharmacy}</td>
-                        <td style={{ width: '3%' }}>{Number(item.pricePharmacy).toFixed(2)}</td>
+                        <td style={{ width: '3%' }}>{Number(item.pricePharmacy).toFixed(2)} $</td>
                         <td style={{ width: '15%' }}>
                             <textarea
                                 value={item.information} style={{ width: '100%' }} rows="5" readOnly
@@ -59,7 +59,7 @@ const ResultTableCustomer = () => {
                         </td>
                         <td style={{ width: '5%' }}>{item.status}</td>
                         <td style={{ width: '5%' }}>{item.promotion ? item.promotion + "%" : 0}</td>
-                        <td style={{ width: '5%' }}>{item.totalPromotion ? item.totalPromotion : 0}</td>
+                        <td style={{ width: '5%' }}>{item.totalPromotion ? item.totalPromotion : 0} $</td>
                         <td style={{ width: '5%' }}><img src={item.pharmacyImage} alt="img" style={{ width: '170px', height: '113px' }} /></td>
 
                         <td style={{ width: '1%' }}>

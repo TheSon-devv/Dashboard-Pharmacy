@@ -17,6 +17,8 @@ import visibility_hide from "../../assets/visibility_hide.png";
 // import { connect, useDispatch, useSelector } from 'react-redux';
 import { Button } from "@material-ui/core";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { auth } from "../../store/actions/authenticate";
 // import { auth } from "../../actions/auth";
 
 function Copyright() {
@@ -24,7 +26,7 @@ function Copyright() {
         <Typography variant="body2" color="textSecondary" align="center">
             {"Copyright © "}
             <Link color="inherit" to="/">
-                Restaurant
+                VietSkin
             </Link>{" "}
             {new Date().getFullYear()}
             {""}
@@ -37,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
         height: "100vh",
     },
     image: {
-        backgroundImage: "url(https://images.pexels.com/photos/3660229/pexels-photo-3660229.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)",
+        backgroundImage: "url(https://images.pexels.com/photos/3936421/pexels-photo-3936421.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)",
         backgroundRepeat: "no-repeat",
         backgroundColor:
             theme.palette.type === "light"
@@ -78,34 +80,14 @@ const useStyles = makeStyles((theme) => ({
 const SignIn = ({ ...props }) => {
     const classes = useStyles();
     const history = useHistory();
+    const dispatch = useDispatch();
+    const errorMessage = useSelector(state => state.authenticate.message);
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [show, setShow] = useState(false)
     const [error, setError] = useState("")
     const onSubmit = data => {
-        const dataLogin = {
-            email: data.email,
-            password: data.password
-        }
-        axios.post(`${process.env.REACT_APP_BASE_URL}/auth/admin/login`, dataLogin)
-            .then(res => {
-                if (res.data.code === 200) {
-                    console.log(res.data)
-                    localStorage.setItem('token', res.data.dataLogin.accessToken)
-                    localStorage.setItem('expiresIn', res.data.dataLogin.expiresIn)
-                    localStorage.setItem('userId', res.data.dataLogin.userId)
-                    history.push('/')
-                    setTimeout(() => {
-                        localStorage.clear();
-                        window.location.reload();
-                    }, res.data.dataLogin.expiresIn * 1000)
-                }
-                else {
-                    setError("Tài khoản hoặc mật khẩu không chính xác !")
-                }
-            })
-            .catch(err => console.log(err))
-        console.log(dataLogin)
+        dispatch(auth(data.email,data.password))
     }
     return (
         <>
@@ -118,7 +100,7 @@ const SignIn = ({ ...props }) => {
                             <LockOutlinedIcon />
                         </Avatar>
                         <Typography component="h1" variant="h5">
-                            Sign in
+                            Quản trị VietSkin
                         </Typography>
                         <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
                             <div className="row px-3 py-2">
@@ -155,9 +137,9 @@ const SignIn = ({ ...props }) => {
                             </Button>
                             <div style={{ width: '100%', height: 380 }}>
                                 {
-                                    error !== null ? (
+                                    errorMessage !== null ? (
                                         <div style={{ display: 'flex', justifyContent: 'center', paddingTop: 50 }}>
-                                            <p style={{ color: 'red', fontWeight: '700', fontSize: 18 }}>{error}</p>
+                                            <p style={{ color: 'red', fontWeight: '700', fontSize: 18 }}>{errorMessage}</p>
                                         </div>
                                     ) : null
                                 }
