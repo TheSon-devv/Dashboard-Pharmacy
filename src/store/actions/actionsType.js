@@ -18,6 +18,7 @@ export const GET_TYPE_PRODUCT = 'GET_TYPE_PRODUCT';
 export const ADD_TYPE_PRODUCT = 'ADD_TYPE_PRODUCT';
 export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const DELETE_PRODUCT = 'DELETE_PRODUCT';
+export const DELETE_TYPE_PRODUCT = 'DELETE_TYPE_PRODUCT';
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 
 //Blog
@@ -32,6 +33,12 @@ export const GET_ORDER = 'GET_ORDER';
 export const ADD_ORDER = 'ADD_ORDER';
 export const DELETE_ORDER = 'DELETE_ORDER';
 export const UPDATE_ORDER = 'UPDATE_ORDER';
+
+//Doctor
+export const GET_DOCTOR = 'GET_DOCTOR';
+export const ADD_DOCTOR = 'ADD_DOCTOR';
+export const DELETE_DOCTOR = 'DELETE_DOCTOR';
+export const UPDATE_DOCTOR = 'UPDATE_DOCTOR';
 
 //Pagination
 export const TOTAL_PAGE = 'TOTAL_PAGE';

@@ -47,6 +47,7 @@ const PopUpEditBlog = (props) => {
         }
         return () => (isSubscribed = false)
     }, [props.dataEdit])
+    console.log(props.dataEdit)
     return (
         <div className="container px-3">
             <Popup open={props.open} closeOnDocumentClick onClose={props.closeModal} modal>
@@ -88,7 +89,7 @@ const PopUpEditBlog = (props) => {
                                     value={data.information}
                                     onChange={updateHandlerChanged}
                                     required={true}
-                                    minLength="1"
+                                    rows="15"
                                 />
                             </div>
 

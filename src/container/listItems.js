@@ -31,6 +31,14 @@ export const mainListItems = (
                 <ListItemText primary="Quản lý khách hàng" />
             </ListItem>
         </NavLink>
+        <NavLink to="/ManageDoctor" style={{ textDecoration: 'none', color: '#000000' }}>
+            <ListItem button>
+                <ListItemIcon>
+                    <LocalPharmacyRoundedIcon />
+                </ListItemIcon>
+                <ListItemText primary="Quản lý bác sỹ" />
+            </ListItem>
+        </NavLink>
         <NavLink to="/ManageProduct" style={{ textDecoration: 'none', color: '#000000' }}>
             <ListItem button>
                 <ListItemIcon>

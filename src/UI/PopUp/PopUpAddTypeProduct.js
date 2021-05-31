@@ -1,11 +1,13 @@
+
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Popup from "reactjs-popup";
 import 'reactjs-popup/dist/index.css';
-import { addTypeProduct, getProduct } from '../../store/actions/product';
+import { addTypeProduct, deleteTypeProduct } from '../../store/actions/product';
+import DeleteIcon from "@material-ui/icons/Delete";
+import { Button } from '@material-ui/core';
 
 
 const PopUpAddTypeProduct = (props) => {
@@ -20,6 +22,12 @@ const PopUpAddTypeProduct = (props) => {
         //     dispatch(getProduct())
         // }, 1000)
     }
+    const onDelete = (id) => {
+        if (window.confirm("Bạn có chắc muốn xóa loại sản phẩm này ?")) {
+            dispatch(deleteTypeProduct(id))
+        }
+    }
+    let sttAcc = 0;
     return (
         <div className="container px-3">
             <Popup open={props.open} closeOnDocumentClick onClose={props.closeModal} modal>
@@ -38,7 +46,7 @@ const PopUpAddTypeProduct = (props) => {
                                     maxLength="50"
                                 />
                             </div>
-                            
+
                         </div>
 
                         <div className="py-3" style={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -46,6 +54,44 @@ const PopUpAddTypeProduct = (props) => {
                             <button className="btn btn-danger" style={{ marginLeft: 10 }} onClick={props.closeModal}>Hủy</button>
                         </div>
                     </form>
+                </div>
+                <div style={{ height: '400px', overflow: 'auto', padding: '10px' }}>
+                    <div className="col-sm-12 ">
+                        <div className="w-100 boxTable">
+                            <table className="table table-hover datatable-column-search-inputs " >
+                                <thead className="table-bordered table-active ">
+                                    <tr>
+                                        <th className="font-weight-bold">STT</th>
+                                        <th className="font-weight-bold">Tên loại thuốc</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        typeProduct.map(item => {
+                                            sttAcc++;
+                                            return (
+                                                <tr key={item._id}>
+                                                    <td>{sttAcc}</td>
+                                                    <td>{item.nameTypePharmacy}</td>
+                                                    <td style={{ width: '1%' }}>
+                                                        <Button>
+                                                            <DeleteIcon color="secondary"
+                                                                onClick={() => onDelete(item._id)}
+                                                            />
+                                                        </Button>
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
+                                </tbody>
+
+                            </table>
+
+                        </div>
+                    </div>
+
                 </div>
             </Popup>
         </div>

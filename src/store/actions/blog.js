@@ -34,7 +34,7 @@ export const Update = (id, dataUpdate) => {
 
 export const getBlog = () => {
     return dispatch => {
-        axios.get(`${process.env.REACT_APP_BASE_URL}/blog`, headerAuthorization())
+        axios.get(`${process.env.REACT_APP_BASE_URL}/blog`)
             .then(res => {
                 if (res.data.code === 200) {
                     console.log(res.data)
@@ -102,12 +102,12 @@ export const updateBlog = (id, nameBlog, adminCreate, information, blogImage) =>
                 // console.log(res.data)
                 if (res.data.code === 200) {
                     dispatch(Update(id, formData))
-                    toast.success('Sửa thông tin sản phẩm thành công !', { position: toast.POSITION.TOP_RIGHT })
+                    toast.success('Sửa thông tin bài đăng thành công !', { position: toast.POSITION.TOP_RIGHT })
                 }
                 else {
-                    toast.error('Sửa thông tin sản phẩm thất bại !', { position: toast.POSITION.TOP_RIGHT })
+                    toast.error('Sửa thông tin bài đăng thất bại !', { position: toast.POSITION.TOP_RIGHT })
                 }
             })
-            .catch(err => console.log(err))
+            .catch(err => console.log(err)) 
     }
 }

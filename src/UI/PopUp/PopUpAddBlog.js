@@ -49,6 +49,7 @@ const PopUpAdd = (props) => {
                                 <textarea {...register("information", { required: true })}
                                     className="w-100 form-control focus-remove-shadow"
                                     style={{ boxShadow: "none !important" }}
+                                    rows="15"
                                 />
                             </div>
 

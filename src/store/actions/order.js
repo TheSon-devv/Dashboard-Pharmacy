@@ -32,7 +32,7 @@ export const Update = (id, dataUpdate) => {
 
 export const getOrder = () => {
     return dispatch => {
-        axios.get(`${process.env.REACT_APP_BASE_URL}/checkout`, headerAuthorization())
+        axios.get(`${process.env.REACT_APP_BASE_URL}/checkout`)
             .then(res => {
                 if (res.data.code === 200) {
                     console.log(res.data)

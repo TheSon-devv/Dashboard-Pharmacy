@@ -5,6 +5,7 @@ import { pagination } from "./pagination";
 import { product } from "./product";
 import { blog } from "./blog";
 import { order } from "./order";
+import { doctor } from "./doctor";
 
 export const reducers = combineReducers({
     authenticate,
@@ -12,5 +13,6 @@ export const reducers = combineReducers({
     product,
     blog,
     order,
-    pagination
+    pagination,
+    doctor
 })

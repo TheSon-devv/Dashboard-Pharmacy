@@ -3,28 +3,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import Popup from "reactjs-popup";
 import 'reactjs-popup/dist/index.css';
-import { getProduct, updateProduct } from '../../store/actions/product';
+import { updateDoctor,getDoctor } from '../../store/actions/doctor';
 
 
 const PopUpEditPharmacy = (props) => {
     const [data, setData] = useState({
-        namePharmacy: "",
-        typePharmacy: "",
-        pricePharmacy: "",
-        information: "",
-        status: "",
-        promotion: "",
-        pharmacyImage: null,
+        nameDoctor: "",
+        workplace: "",
+        experience: "",
+        details: "",
+        education: "",
+        experienceYear: "",
+        doctorImage: null
     });
-    const product = useSelector(state => state.product.productList);
-    const typeProduct = useSelector(state => state.product.typeProduct)
+    const doctor = useSelector(state => state.doctor.doctorList);
     const dispatch = useDispatch();
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        await dispatch(updateProduct(props.dataEdit, data.namePharmacy, data.pricePharmacy, data.status, data.promotion, data.information, data.pharmacyImage));
+        await dispatch(updateDoctor(props.dataEdit, data.nameDoctor, data.workplace, data.experience, data.details, data.education, data.experienceYear, data.doctorImage));
         setTimeout(() => {
-            dispatch(getProduct())
+            dispatch(getDoctor())
         }, 1000)
     }
 
@@ -37,7 +36,7 @@ const PopUpEditPharmacy = (props) => {
     const updateFileChanged = (e) => {
         setData({
             ...data,
-            pharmacyImage: e.target.files[0]
+            doctorImage: e.target.files[0]
         })
     }
     useEffect(() => {
@@ -45,7 +44,7 @@ const PopUpEditPharmacy = (props) => {
         if (isSubscribed) {
             if (props.dataEdit !== 0) {
                 setData({
-                    ...product.find(x => x._id === props.dataEdit)
+                    ...doctor.find(x => x._id === props.dataEdit)
                 })
             }
         }
@@ -62,80 +61,98 @@ const PopUpEditPharmacy = (props) => {
                 <div className="px-3">
                     <form onSubmit={onSubmit}>
                         <div className="row py-2">
+
                             <div className="col-md-6 col-12">
                                 <input type="text"
                                     className="w-100 form-control focus-remove-shadow"
                                     style={{ boxShadow: "none !important" }}
-                                    name="namePharmacy"
-                                    value={data.namePharmacy}
+                                    name="nameDoctor"
+                                    value={data.nameDoctor}
                                     onChange={updateHandlerChanged}
                                     required={true}
                                     minLength="1"
                                     maxLength="50"
                                 />
                             </div>
+
                             <div className="col-md-6 col-12">
 
                                 <input type="text"
                                     className="w-100 form-control focus-remove-shadow"
                                     style={{ boxShadow: "none !important" }}
-                                    name="pricePharmacy"
-                                    value={data.pricePharmacy}
+                                    name="workplace"
+                                    value={data.workplace}
                                     onChange={updateHandlerChanged}
                                     required={true}
                                     minLength="1"
-                                    maxLength="50"
+                                    maxLength="150"
                                 />
                             </div>
                         </div>
 
-                        <div className="row py-2">
-                            <div className="col-md-6 col-12">
-                                <select
-                                    name="status"
-                                    value={data.status}
-                                    onChange={updateHandlerChanged}
-                                    className="w-100 form-control focus-remove-shadow"
-                                    style={{ boxShadow: "none !important" }}
-                                >
-                                    <option value="New">Mới</option>
-                                    <option value="Old">Cũ</option>
-                                </select>
-                            </div>
-                            <div className="col-md-6 col-12">
-
-                                <select
-                                    className="w-100 form-control focus-remove-shadow"
-                                    style={{ boxShadow: "none !important" }}
-                                    name="promotion"
-                                    value={data.promotion}
-                                    onChange={updateHandlerChanged}
-                                >
-                                    <option value="">Khuyến mãi</option>
-                                    <option value="5">5%</option>
-                                    <option value="10">10%</option>
-                                    <option value="15">15%</option>
-                                    <option value="20">20%</option>
-                                    <option value="25">25%</option>
-                                    <option value="30">30%</option>
-                                </select>
-                            </div>
-                        </div>
 
                         <div className="row py-2">
+
                             <div className="col-md-6 col-12">
                                 <textarea type="text"
                                     className="w-100 form-control focus-remove-shadow"
                                     style={{ boxShadow: "none !important" }}
-                                    name="information"
-                                    value={data.information}
+                                    name="experience"
+                                    value={data.experience}
                                     onChange={updateHandlerChanged}
                                     required={true}
                                     minLength="1"
                                     rows="10"
                                 />
                             </div>
+
                             <div className="col-md-6 col-12">
+                                <textarea type="text"
+                                    className="w-100 form-control focus-remove-shadow"
+                                    style={{ boxShadow: "none !important" }}
+                                    name="details"
+                                    value={data.details}
+                                    onChange={updateHandlerChanged}
+                                    required={true}
+                                    minLength="1"
+                                    rows="10"
+                                />
+                            </div>
+
+                        </div>
+
+                        <div className="row py-2">
+
+                            <div className="col-md-6 col-12">
+                                <input type="text"
+                                    className="w-100 form-control focus-remove-shadow"
+                                    style={{ boxShadow: "none !important" }}
+                                    name="education"
+                                    value={data.education}
+                                    onChange={updateHandlerChanged}
+                                    required={true}
+                                    minLength="1"
+                                    maxLength="50"
+                                />
+                            </div>
+
+                            <div className="col-md-6 col-12">
+
+                                <input type="text"
+                                    className="w-100 form-control focus-remove-shadow"
+                                    style={{ boxShadow: "none !important" }}
+                                    name="experienceYear"
+                                    value={data.experienceYear}
+                                    onChange={updateHandlerChanged}
+                                    required={true}
+                                    minLength="1"
+                                    maxLength="150"
+                                />
+                            </div>
+                        </div>
+
+                        <div className="row py-2">
+                            <div className="col-md-12 col-12">
                                 <input type="file"
                                     name="updateFileChanged"
                                     value={data.updateFileChanged}

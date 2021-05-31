@@ -37,6 +37,13 @@ export const Delete = (dataDelete) => {
     }
 }
 
+export const DeleteTypeProduct = (dataDelete) => {
+    return {
+        type: actionType.DELETE_TYPE_PRODUCT,
+        dataDelete: dataDelete
+    }
+}
+
 export const Update = (id, dataUpdate) => {
     return {
         type: actionType.UPDATE_PRODUCT,
@@ -49,7 +56,7 @@ export const getProduct = () => {
         axios.get(`${process.env.REACT_APP_BASE_URL}/pharmacy`, headerAuthorization())
             .then(res => {
                 if (res.data.code === 200) {
-                    console.log(res.data)
+                    // console.log(res.data)
                     dispatch(Success(res.data.getPharmacy))
                 }
                 if (res.data.code === 401) {
@@ -64,7 +71,7 @@ export const getTypeProduct = () => {
         axios.get(`${process.env.REACT_APP_BASE_URL}/typePharmacy`)
             .then(res => {
                 if (res.data.code === 200) {
-                    console.log(res.data)
+                    // console.log(res.data)
                     dispatch(TypeProduct(res.data.getTypePharmacy))
                 }
                 if (res.data.code === 401) {
@@ -83,7 +90,7 @@ export const addTypeProduct = (nameTypePharmacy) => {
         axios.post(`${process.env.REACT_APP_BASE_URL}/typePharmacy`, formData, headerAuthorization())
             .then(res => {
                 if (res.data.code === 200) {
-                    console.log(res.data)
+                    // console.log(res.data)
                     dispatch(AddTypeProduct(res.data.saveTypePharmacy))
                     toast.success('Thêm loại thuốc thành công !', { position: toast.POSITION.TOP_RIGHT })
                 }
@@ -105,11 +112,11 @@ export const addProduct = (namePharmacy, typePharmacy, pricePharmacy, status, pr
         formData.append("promotion", promotion);
         formData.append("status", status);
         formData.append("pharmacyImage", pharmacyImage);
-        console.log(...formData)
+        // console.log(...formData)
         axios.post(`${process.env.REACT_APP_BASE_URL}/pharmacy`, formData, headerAuthorization())
             .then(res => {
                 if (res.data.code === 200) {
-                    console.log(res.data)
+                    // console.log(res.data)
                     dispatch(Add(res.data.savePharmacy))
                     toast.success('Thêm sản phẩm thuốc thành công !', { position: toast.POSITION.TOP_RIGHT })
                 }
@@ -138,6 +145,22 @@ export const deleteProduct = (id) => {
     }
 }
 
+export const deleteTypeProduct = (id) => {
+    return dispatch => {
+        axios.delete(`${process.env.REACT_APP_BASE_URL}/typePharmacy/${id}`, headerAuthorization())
+            .then(res => {
+                if (res.data.code === 200) {
+                    dispatch(DeleteTypeProduct(id))
+                    toast.success('Xóa loại sản phẩm thành công !', { position: toast.POSITION.TOP_RIGHT })
+                }
+                else {
+                    toast.error('Xóa loại sản phẩm thất bại !', { position: toast.POSITION.TOP_RIGHT })
+                }
+            })
+            .catch(err => console.log(err))
+    }
+}
+
 
 export const updateProduct = (id, namePharmacy, pricePharmacy, status, promotion, information, pharmacyImage) => {
     return dispatch => {
@@ -148,10 +171,10 @@ export const updateProduct = (id, namePharmacy, pricePharmacy, status, promotion
         formData.append("promotion", promotion);
         formData.append("status", status);
         formData.append("pharmacyImage", pharmacyImage);
-        console.log(...formData)
+        // console.log(...formData)
         axios.put(`${process.env.REACT_APP_BASE_URL}/pharmacy/${id}`, formData, headerAuthorization())
             .then(res => {
-                console.log(res.data)
+                // console.log(res.data)
                 if (res.data.code === 200) {
                     dispatch(Update(id, formData))
                     toast.success('Sửa thông tin sản phẩm thành công !', { position: toast.POSITION.TOP_RIGHT })

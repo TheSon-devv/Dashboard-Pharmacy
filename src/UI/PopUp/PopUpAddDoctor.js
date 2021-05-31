@@ -5,20 +5,19 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Popup from "reactjs-popup";
 import 'reactjs-popup/dist/index.css';
-import { addProduct, getProduct } from '../../store/actions/product';
+import { addDoctor, getDoctor } from '../../store/actions/doctor';
 
 
-const PopUpAdd = (props) => {
+const PopUpAddDoctor = (props) => {
     // , formState: { errors }
     const { register, handleSubmit } = useForm();
     const dispatch = useDispatch();
-    const typeProduct = useSelector(state => state.product.typeProduct)
 
     const onSubmit = (data) => {
-        dispatch(addProduct(data.namePharmacy, data.typePharmacy, data.pricePharmacy, data.status, data.promotion, data.information, data.pharmacyImage[0]));
-        setTimeout(() => {
-            dispatch(getProduct())
-        }, 1000)
+        dispatch(addDoctor(data.nameDoctor, data.workplace, data.experience, data.details, data.education, data.experienceYear, data.doctorImage[0]));
+        // setTimeout(() => {
+        //     dispatch(getProduct())
+        // }, 1000)
     }
     return (
         <div className="container px-3">
@@ -32,76 +31,59 @@ const PopUpAdd = (props) => {
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="row py-2">
                             <div className="col-md-6 col-12">
-                                <input type="text" placeholder="Tên sản phẩm" {...register("namePharmacy", { required: true, maxLength: 50 })}
+                                <input type="text" placeholder="Tên bác sỹ" {...register("nameDoctor", { required: true })}
                                     className="w-100 form-control focus-remove-shadow"
                                     style={{ boxShadow: "none !important" }}
-                                    maxLength="50"
+                                    maxLength="150"
                                 />
                             </div>
                             <div className="col-md-6 col-12">
-                                <input type="text" placeholder="Đơn giá ex : 7 $" {...register("pricePharmacy", { required: true, maxLength: 11 })}
+                                <input type="text" placeholder="Chuyên ngành" {...register("workplace", { required: true })}
+                                    className="w-100 form-control focus-remove-shadow"
+                                    style={{ boxShadow: "none !important" }}
+                                    maxLength="150"
+                                />
+                            </div>
+                        </div>
+
+                        <div className="row py-2">
+                            <div className="col-md-6 col-12">
+                                <textarea placeholder="Kinh nghiệm" {...register("experience", { required: true })}
+                                    className="w-100 form-control focus-remove-shadow"
+                                    style={{ boxShadow: "none !important" }}
+                                    rows="10"
+                                />
+                            </div>
+                            <div className="col-md-6 col-12">
+                                <textarea placeholder="Bằng cấp" {...register("details", { required: true })}
+                                    className="w-100 form-control focus-remove-shadow"
+                                    style={{ boxShadow: "none !important" }}
+                                    rows="10"
+                                />
+                            </div>
+
+                        </div>
+
+                        <div className="row py-2">
+                            <div className="col-md-6 col-12">
+                                <input type="text" placeholder="Học vấn" {...register("education", { required: true })}
+                                    className="w-100 form-control focus-remove-shadow"
+                                    style={{ boxShadow: "none !important" }}
+                                    maxLength="500"
+                                />
+                            </div>
+                            <div className="col-md-6 col-12">
+                                <input type="text" placeholder="Số năm kinh nghiệm" {...register("experienceYear", { required: true })}
                                     className="w-100 form-control focus-remove-shadow"
                                     style={{ boxShadow: "none !important" }}
                                     maxLength="2"
                                 />
                             </div>
-                        </div>
-
-                        <div className="row py-2">
-                            <div className="col-md-6 col-12">
-                                <select {...register("status", { required: true, maxLength: 11 })}
-                                    className="w-100 form-control focus-remove-shadow"
-                                    style={{ boxShadow: "none !important" }}
-                                >
-                                    <option value="New">Mới</option>
-                                    <option value="Old">Cũ</option>
-                                </select>
-                            </div>
-                            <div className="col-md-6 col-12">
-                                <select {...register("promotion")}
-                                    className="w-100 form-control focus-remove-shadow"
-                                    style={{ boxShadow: "none !important" }}
-                                >
-                                    <option value="">Khuyến mãi</option>
-                                    <option value="5">5%</option>
-                                    <option value="10">10%</option>
-                                    <option value="15">15%</option>
-                                    <option value="20">20%</option>
-                                    <option value="25">25%</option>
-                                    <option value="30">30%</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div className="row py-2">
-                            <div className="col-md-6 col-12">
-                                <textarea placeholder="Thông tin sản phẩm" {...register("information", { required: true })}
-                                    className="w-100 form-control focus-remove-shadow"
-                                    style={{ boxShadow: "none !important" }}
-                                    rows="12"
-                                />
-                            </div>
-                            <div className="col-md-6 col-12">
-                                <select {...register("typePharmacy", { required: true })}
-                                    className="w-100 form-control focus-remove-shadow"
-                                    style={{ boxShadow: "none !important" }}
-                                >
-                                    <option value="">Loại thuốc</option>
-                                    {
-                                        typeProduct.map(item => {
-                                            return (
-                                                <option key={item._id} value={item._id}>{item.nameTypePharmacy}</option>
-                                            )
-                                        })
-                                    }
-                                </select>
-                            </div>
 
                         </div>
-
                         <div className="row py-2">
                             <div className="col-md-12 col-12">
-                                <input type="file" {...register("pharmacyImage", { required: true })}
+                                <input type="file" {...register("doctorImage", { required: true })}
                                 // className="w-100 form-control focus-remove-shadow"
                                 // style={{ boxShadow: "none !important" }}
                                 />
@@ -120,4 +102,4 @@ const PopUpAdd = (props) => {
     )
 }
 
-export default PopUpAdd
+export default PopUpAddDoctor
