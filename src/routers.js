@@ -4,6 +4,7 @@ import ManageBlog from "./components/Manage/ManageBlog";
 import ManageOrder from "./components/Manage/ManageOrder";
 import Home from "./components/Home/Home";
 import ManageDoctor from "./components/Manage/ManageDoctor";
+import ManageBooking from "./components/Manage/ManageBooking";
 
 const routers = [
     {
@@ -30,6 +31,10 @@ const routers = [
     {
         path: "/ManageDoctor",
         main: () => <ManageDoctor />
+    },
+    {
+        path: "/ManageBooking",
+        main: () => <ManageBooking />
     },
 ];
 

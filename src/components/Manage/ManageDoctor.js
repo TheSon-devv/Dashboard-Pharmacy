@@ -1,8 +1,9 @@
 
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import PopUpAddDoctor from '../../UI/PopUp/PopUpAddDoctor'
 import ResultTableDoctor from '../content/ResultTableDoctor'
+import { CSVLink } from "react-csv";
 
 const ManageDoctor = () => {
     const [show, setShow] = useState(false)
@@ -10,13 +11,12 @@ const ManageDoctor = () => {
     const closeModal = () => setShow(false)
     const closeModalType = () => setShowType(false)
     const dispatch = useDispatch()
+    const doctor = useSelector(state => state.doctor.doctorList);
 
     return (
         <div className="container-fluid mt-2">
             <div className="content">
-                <div >
-                    <button className="btn btn-success" onClick={() => setShow(true)}>Thêm bác sỹ</button>
-                </div>
+                <button className="btn btn-success" onClick={() => setShow(true)}>Thêm bác sỹ</button>
                 {
                     show ? (
                         <PopUpAddDoctor
@@ -26,6 +26,9 @@ const ManageDoctor = () => {
                         />
                     ) : null
                 }
+                <CSVLink data={doctor} className="btn btn-info" style={{ marginLeft: 15 }}>
+                    Thống kê CSV
+                </CSVLink>
                 <ResultTableDoctor />
             </div>
         </div>

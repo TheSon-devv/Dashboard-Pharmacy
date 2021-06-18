@@ -1,27 +1,18 @@
 
-import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import PopUpAddCustomer from '../../UI/PopUp/PopUpAddCustomer'
-import ResultTableOrder from '../../components/content/ResultTableOrder'
+import React from 'react';
+import { CSVLink } from "react-csv";
+import { useSelector } from 'react-redux';
+import ResultTableOrder from '../../components/content/ResultTableOrder';
 
 const ManageOrder = () => {
-    const [show, setShow] = useState(false)
-    const closeModal = () => setShow(false)
-    const dispatch = useDispatch()
+    const order = useSelector(state => state.order.orderList);
 
     return (
         <div className="container-fluid mt-2">
             <div className="content">
-                {/* <button className="btn btn-success" onClick={() => setShow(true)}>Thêm đơn</button> */}
-                {
-                    show ? (
-                        <PopUpAddCustomer
-                            open={show}
-                            closeModal={closeModal}
-                            title="Thêm khách hàng"
-                        />
-                    ) : null
-                }
+                <CSVLink data={order} className="btn btn-info" style={{ marginLeft: 15 }}>
+                    Thống kê CSV
+                </CSVLink>
                 <ResultTableOrder />
             </div>
         </div>

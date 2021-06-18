@@ -45,4 +45,9 @@ export const TOTAL_PAGE = 'TOTAL_PAGE';
 export const GET_PAGE = 'GET_PAGE';
 export const GET_PER_PAGE = 'GET_PER_PAGE';
 
+//Booking Doctor
+export const GET_BOOKING = 'GET_BOOKING';
+export const ADD_BOOKING = 'ADD_BOOKING';
+export const DELETE_BOOKING = 'DELETE_BOOKING';
+export const UPDATE_BOOKING = 'UPDATE_BOOKING';
 
