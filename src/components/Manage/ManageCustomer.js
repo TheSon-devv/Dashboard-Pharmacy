@@ -14,19 +14,6 @@ const ManageCustomer = () => {
     return (
         <div className="container-fluid mt-2">
             <div className="content">
-                <button className="btn btn-success" onClick={() => setShow(true)}>Thêm khách hàng</button>
-                {
-                    show ? (
-                        <PopUpAddCustomer
-                            open={show}
-                            closeModal={closeModal}
-                            title="Thêm khách hàng"
-                        />
-                    ) : null
-                }
-                <CSVLink data={dataCustomer} className="btn btn-info" style={{marginLeft:15}}>
-                    Thống kê CSV 
-                </CSVLink>
                 <ResultTableCustomer />
             </div>
         </div>
