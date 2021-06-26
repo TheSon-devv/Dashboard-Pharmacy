@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import EditIcon from '@material-ui/icons/Edit';
+import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
 import DeleteIcon from "@material-ui/icons/Delete";
 import { Button, ButtonGroup } from '@material-ui/core';
 import { deleteBooking, getBooking } from '../../store/actions/booking';
+import { getDoctor } from '../../store/actions/doctor';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import PopUpEditPharmacy from '../../UI/PopUp/PopUpEditPharmacy';
+import PopUpEditBooking from '../../UI/PopUp/PopUpEditBooking';
 import { getPage, totalPage } from '../../store/actions/pagination';
 import PaginationTable from '../Pagination/PaginationTable';
 
@@ -22,6 +23,7 @@ const ResultTableBooking = () => {
 
     useEffect(() => {
         dispatch(getBooking());
+        dispatch(getDoctor())
         dispatch(getPage(1));
     }, [dispatch])
 
@@ -56,7 +58,7 @@ const ResultTableBooking = () => {
                                 style={{ boxShadow: "none !important" }}
                             />
                         </td>
-                        <td style={{ width: '5%' }}>
+                        <td style={{ width: '7%' }}>
                             {
                                 item.doctor && item.doctor.length ? (
                                     item.doctor.map(i => (
@@ -65,9 +67,39 @@ const ResultTableBooking = () => {
                                 ) : null
                             }
                         </td>
-
+                        <td style={{ width: '10%' }}>
+                            {
+                                item.status === 0 ? (
+                                    <div>
+                                        <span>Chưa xác nhận</span>
+                                    </div>
+                                ) : (
+                                    <div >
+                                        <span>{item.address}</span>
+                                    </div>
+                                )
+                            }
+                        </td>
+                        <td style={{ width: '5%' }}>
+                            {
+                                item.status === 0 ? (
+                                    <div style={{ padding: '5px', display: 'flex', justifyContent: 'center', borderRadius: '5px', background: 'red' }}>
+                                        <span style={{ color: '#fff' }}>Chưa xác nhận</span>
+                                    </div>
+                                ) : (
+                                    <div style={{ padding: '5px', display: 'flex', justifyContent: 'center', borderRadius: '5px', background: 'green' }}>
+                                        <span style={{ color: '#fff' }}>Đã xác nhận</span>
+                                    </div>
+                                )
+                            }
+                        </td>
                         <td style={{ width: '1%' }}>
                             <ButtonGroup>
+                                <Button>
+                                    <DoneOutlineIcon color="primary"
+                                        onClick={() => onUpdate(item._id)}
+                                    />
+                                </Button>
                                 <Button>
                                     <DeleteIcon color="secondary"
                                         onClick={() => onDelete(item._id)}
@@ -113,6 +145,8 @@ const ResultTableBooking = () => {
                                 <th className="font-weight-bold">Số điện thoại</th>
                                 <th className="font-weight-bold">Bệnh lý cần tư vấn</th>
                                 <th className="font-weight-bold">Đặt lịch hẹn với bác sỹ</th>
+                                <th className="font-weight-bold">Địa chỉ</th>
+                                <th className="font-weight-bold">Trạng thái</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -127,10 +161,10 @@ const ResultTableBooking = () => {
             <ToastContainer style={{ marginTop: 50 }} />
             {
                 show ? (
-                    <PopUpEditPharmacy
+                    <PopUpEditBooking
                         open={show}
                         closeModal={closeModal}
-                        title="Sửa thông tin thuốc"
+                        title="Xác nhận đặt lịch khám"
                         dataEdit={dataEdit}
                     />
                 ) : null

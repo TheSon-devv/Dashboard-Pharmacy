@@ -8,22 +8,27 @@ import { getOrder } from '../../store/actions/order';
 const Home = () => {
     const dispatch = useDispatch()
     const [data, setData] = useState({})
+    const [statistical, setStatistical] = useState([])
 
 
     const getSumCheckOut = () => {
         let count = [];
+        let id = [];
         let nameKH = [];
 
         axios.get(`${process.env.REACT_APP_BASE_URL}/checkout`, headerAuthorization())
             .then(res => {
-
+                console.log(res.data, 'data')
                 if (res.data.code === 200) {
-                    for (const i of res.data.getSumCheckout) {
+                    for (const i of res.data.getStatistical) {
                         count.push(parseInt(i.count))
+                        id.push(i._id[0])
+                        console.log(count, 'count')
+                        console.log(id, 'id')
                         axios.get(`${process.env.REACT_APP_BASE_URL}/customer/${i._id[0]}`, headerAuthorization())
                             .then(res => {
-                                console.log(res.data.getCustomer.email, 'asdas');
                                 nameKH.push(res.data.getCustomer.email);
+                                console.log(nameKH, 'nameKH')
                                 setData({
                                     labels: nameKH,
                                     datasets: [
@@ -33,9 +38,9 @@ const Home = () => {
                                                 'rgba(255, 99, 132, 0.2)',
                                                 'rgba(54, 162, 235, 0.2)',
                                                 'rgba(255, 206, 86, 0.2)',
-                                                // 'rgba(75, 192, 192, 0.2)',
-                                                // 'rgba(153, 102, 255, 0.2)',
-                                                // 'rgba(255, 159, 64, 0.2)',
+                                                'rgba(75, 192, 192, 0.2)',
+                                                'rgba(153, 102, 255, 0.2)',
+                                                'rgba(255, 159, 64, 0.2)',
                                             ],
                                             borderColor: [
                                                 'rgba(255, 99, 132, 1)',
@@ -69,11 +74,12 @@ const Home = () => {
         getSumCheckOut()
     }, [])
 
+
     return (
         <Pie
             className="py-2 px-3"
             data={data}
-            height={350}
+            height={300}
             width={600}
             options={{
                 maintainAspectRatio: false,

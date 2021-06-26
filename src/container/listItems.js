@@ -20,7 +20,7 @@ export const mainListItems = (
                 <ListItemIcon>
                     <HomeRoundedIcon />
                 </ListItemIcon>
-                <ListItemText primary="Home" />
+                <ListItemText primary="Thống kê" />
             </ListItem>
         </NavLink>
         <NavLink to="/ManageCustomer" style={{ textDecoration: 'none', color: '#000000' }}>

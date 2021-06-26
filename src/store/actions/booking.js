@@ -86,23 +86,25 @@ export const deleteBooking = (id) => {
 }
 
 
-export const updateBooking = (id,nameCustomer, phone, information, doctor) => {
+export const updateBooking = (id,nameCustomer, phone, information, doctor,status,address) => {
     return dispatch => {
-        const dataUpdateCustomer = {
+        const dataUpdateBooking = {
             nameCustomer,
             phone,
             information,
-            doctor
+            doctor,
+            status,
+            address
         }
-        axios.put(`${process.env.REACT_APP_BASE_URL}/message/${id}`, dataUpdateCustomer, headerAuthorization())
+        axios.put(`${process.env.REACT_APP_BASE_URL}/message/${id}`, dataUpdateBooking, headerAuthorization())
             .then(res => {
                 // console.log(res.data)
                 if (res.data.code === 200) {
-                    dispatch(Update(id, dataUpdateCustomer))
-                    toast.success('Sửa thông tin lịch khám thành công !', { position: toast.POSITION.TOP_RIGHT })
+                    dispatch(Update(id, dataUpdateBooking))
+                    toast.success('Đã xác nhận lịch khám !', { position: toast.POSITION.TOP_RIGHT })
                 }
                 else {
-                    toast.error('Sửa thông tin lịch khám thất bại !', { position: toast.POSITION.TOP_RIGHT })
+                    toast.error('Xác nhận lịch khám thất bại !', { position: toast.POSITION.TOP_RIGHT })
                 }
             })
             .catch(err => console.log(err))
